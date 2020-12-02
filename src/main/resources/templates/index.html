@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/index.css}" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:include="header :: header_part"></div>
+	
+	<h1>顧客リスト</h1>
+	<table>
+		<tr><th>名前</th><th>年齢</th><th>性別</th></tr>
+		<tr th:each="c:${customers}">
+			<td th:text="${c[0]}"></td>
+			<td th:text="${c[1]}"></td>
+			<td th:text="${c[2]}"></td>
+		</tr>
+	</table>
+	<h1>SiteName</h1>
+	
+	<div class="profile">
+		<h1>Profile</h1>
+		<h2 th:text="${name}">Hiroki Muro</h2>
+		<h2 th:text="${age}">25歳</h2>
+		<h2 th:text="${height}">200cm</h2>
+	</div>
+	<form action="/" method="post">
+		<label>Name</label><input type="text" name="nameVal" th:value="${name}">
+		<label><br>年齢</label><input type="text" name="ageVal">
+		<label><br>身長</label><input type="text" name="heightVal">
+		<input type="submit" value="送信">
+	</form>
+</body>
+</html>
