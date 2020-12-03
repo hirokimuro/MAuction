@@ -1,0 +1,91 @@
+@charset "UTF-8";
+a{
+    text-decoration: none;
+}
+.header,.footer{
+    display: flex;
+    text-align: center;
+}
+.title{
+    color: rgb(231, 137, 13);
+    /* background-color: rgb(212, 179, 179); */
+    text-align: center;
+    font-size: 3vw;
+    font-weight: 600;
+    font-family:fantasy;
+    height: 4vw;
+    margin-left: 2vw;
+    margin-right: 10vw;
+    margin-top: 1%;
+}
+.login{
+    font-size: 1.5vw;
+    margin-left: 20vw;
+}
+.seach{
+    color: blue;
+    text-align: center;
+    margin-left: 1vw;
+    margin-top: 1vw;
+}
+.seachIn{
+    margin-left: 2vw;
+    background-color: yellow;
+}
+.intro{
+    position: absolute;
+    text-align: center;
+    top: 7vw;
+    left: 20%;
+}
+.intro h1{
+    font-size: 3vw;
+    font-family:serif;
+    text-shadow:1px 2px 3px rgba(212, 235, 149, 0.918);
+}
+img{
+    /* position: absolute; */
+    left: 0%;
+    opacity: 0.6;
+    width: 100%;
+    height: 30vw;
+}
+.introHead{
+    margin-top: 3vw;
+    background: rgba(171, 206, 196, 0.5);
+}
+.introHead span{
+    color: peru;
+}
+.introHead p{
+    font-size: 2vw;
+    font-weight: 600;
+}
+.introContent{
+    display: flex;
+    /* margin-left: 10vw; */
+}
+.main{
+    display: flex;
+}
+.category{
+    border:2px solid black;
+    margin-right: 40%;
+    margin-left: 5vw;
+}
+.main p{
+    text-align: center;
+}
+.main li{
+    border-bottom: 2px solid black;
+    margin-left: 0vw;
+}
+.footer{
+    margin-top: 10vw;
+    margin-bottom: 0;
+    padding-bottom: 0;
+} 
+.orverView{
+    text-align: center;
+    background: rgba(226, 169, 12, 0.4);
+}

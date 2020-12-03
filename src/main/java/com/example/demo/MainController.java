@@ -29,7 +29,11 @@ public class MainController {
 	repository.saveAndFlush(userData);
 	return new ModelAndView("redirect:/");
 	}
-	
+	@RequestMapping(value="/auction")
+	public ModelAndView homePage(ModelAndView mv) {
+		mv.setViewName("homePage");
+		return mv;
+	}
 //@RequestMapping(value="/",method=RequestMethod.GET)
 //public ModelAndView indexGet(ModelAndView mv){
 //	mv.addObject("name", "室大輝");
