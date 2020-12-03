@@ -8,7 +8,25 @@
 <body>
 	<div th:include="header :: header_part"></div>
 	
+	<form method="post" action="/" th:object="${formModel}">
+		<h1>新規ユーザー登録</h1>
+		<labeL>名前</labeL><input type="text" name="name">
+		<labeL>メール</labeL><input type="text" name="mail">
+		<labeL>パスワード</labeL><input type="pass" name="pass">
+		<input type="submit" value="登録">
+	</form>
 	<h1>顧客リスト</h1>
+	<table>
+		<tr><th>登録者番号</th><th>名前</th><th>メールアドレス
+		</th><th>パスワード</th></tr>
+		<tr th:each="c : ${customers}">
+		<td th:text="${c.id}"></td>
+		<td th:text="${c.name}"></td>
+		<td th:text="${c.mail}"></td>
+		<td>見せられないよ</td>
+		</tr>
+	</table>
+	<!-- <h1>顧客リスト</h1>
 	<table>
 		<tr><th>名前</th><th>年齢</th><th>性別</th></tr>
 		<tr th:each="c:${customers}">
@@ -30,6 +48,6 @@
 		<label><br>年齢</label><input type="text" name="ageVal">
 		<label><br>身長</label><input type="text" name="heightVal">
 		<input type="submit" value="送信">
-	</form>
+	</form> -->
 </body>
 </html>
