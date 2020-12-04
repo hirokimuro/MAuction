@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class UserData {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
 	@Column private long id;
-	
+//	nullable=falseでNOTNULLという意味
 	@Column(length = 20, nullable = false)
 	private String name;
 	

@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +16,44 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 	@Autowired
 	UserDataRepository repository;
+	@Autowired
+	ProductDataRepository repositoryP;
 	
-	@RequestMapping(value="/",method=RequestMethod.GET)
-	public ModelAndView indexGet(ModelAndView mv) {
-		List<UserData> customers = repository.findAll();
-		mv.addObject("customers",customers);
-		mv.setViewName("index");
+	@RequestMapping(value="/listing",method=RequestMethod.GET)
+	public ModelAndView listingGet(ModelAndView mv) {
+		List<ProductData> products = repositoryP.findAll();
+		mv.addObject("products",products);
+		mv.setViewName("listing");
 		return mv;
 	}
-	@RequestMapping(value="/", method = RequestMethod.POST)
-	public ModelAndView indexPost(@ModelAttribute("formModel") UserData
+	@RequestMapping(value="/listing", method = RequestMethod.POST)
+	public ModelAndView listingPost(@ModelAttribute("formModel") ProductData
+	productData, ModelAndView mv){
+	repositoryP.saveAndFlush(productData);
+	return new ModelAndView("redirect:/listing");
+	}
+//	@RequestMapping(value="/listing", method = RequestMethod.POST)
+//	public ModelAndView listingPost(@RequestParam("date") String date , ModelAndView mv){
+//		System.out.println(date);
+//		List<ProductData> products = repositoryP.findAll();
+//		mv.addObject("products",products);
+//		mv.setViewName("listing");
+//		return mv;
+//	}
+	
+	
+	@RequestMapping(value="/regist",method=RequestMethod.GET)
+	public ModelAndView memberRegistGet(ModelAndView mv) {
+		List<UserData> customers = repository.findAll();
+		mv.addObject("customers",customers);
+		mv.setViewName("memberRegist");
+		return mv;
+	}
+	@RequestMapping(value="/regist", method = RequestMethod.POST)
+	public ModelAndView memberRegistPost(@ModelAttribute("formModel") UserData
 	userData, ModelAndView mv){
 	repository.saveAndFlush(userData);
-	return new ModelAndView("redirect:/");
+	return new ModelAndView("redirect:/regist");
 	}
 	@RequestMapping(value="/auction")
 	public ModelAndView homePage(ModelAndView mv) {

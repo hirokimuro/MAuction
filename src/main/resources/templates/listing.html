@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MemberREgist</title>
-    <link rel="stylesheet" th:href="@{/css/memberRegist.css}">
+<meta charset="UTF-8">
+<title>listing</title>
+<link rel="stylesheet" th:href="@{/css/listing.css}">
 </head>
 <body>
     <div class="header">
@@ -15,31 +14,31 @@
             </form>
         </div>
     </div>
-    <div class="introHead">
-        <p><span>月額〜〜円で出品・入札し放題！</span></p>
-        <p>月額料金は初月無料、まずはお試しください♪</p>
-    </div>    
-    <div class="main">
-        <p>会員登録ページ</p>
-        <form method="post" action="/regist"th:object="${formModel}">
-            <label for="name">　　　名前　　<input type="text" name="name"></label><br>
-            <br><label for="mail">メールアドレス<input type="text" name="mail"></label><br>
-            <br><label for="pass">　パスワード　<input type="text" name="pass"><br><p>＊20文字以下</p></label>
-            <br><input class="mainSubmit"type="submit" value="登録">
-        </form>
-    </div>
-    <h1>顧客リスト</h1>
+	<form class="main" action="/listing" method="post" th:object="${formModel}">
+		<p>出品</p>
+		<label>商品名<input type="text" name="name"></label><br>
+		<label>写真<input type="text" name="phot" value="5枚まで載せれます"></label>
+		<!-- 写真の入力text作れない -->
+		<br><label>期限<input type="date" name="date"></label>
+		<br><input class="mainSubmit" type="submit" value="出品">
+	</form>
+	<!-- <form class="main" action="/listing" method="post" >
+		<br><label>期限<input type="date" name="date"></label>
+		<br><input class="mainSubmit" type="submit" value="出品">
+		<br><input type="datetime-local" id="cal" name="">
+	</form>
+	<h1>出品リスト</h1> -->
 	<table>
-		<tr><th>登録者番号</th><th>名前</th><th>メールアドレス
-		</th><th>パスワード</th></tr>
-		<tr th:each="c : ${customers}">
+		<tr><th>登録番号</th><th>商品名</th><th>写真
+		</th><th>期限</th></tr>
+		<tr th:each="c : ${products}">
 		<td th:text="${c.id}"></td>
 		<td th:text="${c.name}"></td>
-		<td th:text="${c.mail}"></td>
-		<td>見せられないよ</td>
+		<td th:text="${c.phot}"></td>
+		<td th:text="${c.date}"></td>
 		</tr>
 	</table>
-    <div class="orverView">
+	<div class="orverView">
         <p>カテゴリ一覧　ブランド｜女性ファッション｜男性ファッション｜女性アクセサリー/時計｜男性アクセサリー/時計香水/コスメ/ネイル｜
             キッズ/ベビー｜自動車｜バイク｜CD/DVD/ビデオゲーム本体/ソフト｜トレーディングカード｜アニメ/コミック/キャラクター｜おもちゃ｜
             家電/AV携帯電話/スマートフォン｜PC本体/周辺機器｜インテリア/ライフヘルス/ビューティーグルメ/ドリンク｜ホビー｜
@@ -50,4 +49,3 @@
             　<br> © Mauction Corporation. All Rights Reserved.</p>
     </div>
 </body>
-</html>
