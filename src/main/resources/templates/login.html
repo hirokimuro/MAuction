@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginPage</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+    <div class="header">
+        <p class="title"><a href="/auction">Mオークション</a></p>
+        <div class="seach">    
+            <form>
+                <P><label>全ての商品から探す<input type="text"><input class="seachIn" type="submit" value="検索"></label></P>
+            </form>
+        </div>
+    </div>
+    <form action="" class="info">
+        <h1>会員登録がお済みの方</h1>
+        <h2>Mオークションに登録したメールアドレスと、パスワードでログインしてください。</h2>
+        <p><label for="">メールアドレス</label><br><input type="text"></p>
+        <p><label for="">パスワード</label><br><input type="text"></p>
+        <input type="submit" value="ログイン">
+    </form>
+    <p><a href="/regist">会員登録未登録の方はこちら</a></p>
+    <p><a href="listing.html">出品</a></p>
+</body>
+</html>

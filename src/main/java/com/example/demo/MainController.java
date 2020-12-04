@@ -34,6 +34,16 @@ public class MainController {
 		mv.setViewName("homePage");
 		return mv;
 	}
+	@RequestMapping(value="/login")
+	public ModelAndView login(ModelAndView mv) {
+		mv.setViewName("login");
+		return mv;
+	}
+	@RequestMapping(value="/regist")
+	public ModelAndView memberRegist(ModelAndView mv) {
+		mv.setViewName("memberRegist");
+		return mv;
+	}
 //@RequestMapping(value="/",method=RequestMethod.GET)
 //public ModelAndView indexGet(ModelAndView mv){
 //	mv.addObject("name", "室大輝");
