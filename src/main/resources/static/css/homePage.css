@@ -22,6 +22,12 @@ a{
     font-size: 1.5vw;
     margin-left: 20vw;
 }
+.login a{
+    border: 2px double rgb(3, 83, 3);
+    color: green;
+    font-family: monospace;
+    background-color: greenyellow;
+}
 .seach{
     color: blue;
     text-align: center;

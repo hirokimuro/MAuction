@@ -14,12 +14,30 @@
             </form>
         </div>
     </div>
-	<form class="main" action="/listing" method="post" th:object="${formModel}">
+	<form class="main" action="/listing" method="post" th:object="${formModel}" enctype="multipart/form-data">
 		<p>出品</p>
 		<label>商品名<input type="text" name="name"></label><br>
-		<label>写真<input type="text" name="phot" value="5枚まで載せれます"></label>
-		<!-- 写真の入力text作れない -->
+		<label>写真<input type="file" name="phot" accept="image/*" multiple value="5枚まで載せれます"></label>
 		<br><label>期限<input type="date" name="date"></label>
+		<br><label>商品カテゴリ
+			<select name="category">
+				<option >商品カテゴリを選んで下さい</option>
+				<option>自動車</option>
+				<option>ファッション</option>
+				<option>スポーツ、レジャー</option>
+				<option>家電、AV</option>
+				<option>コンピュータ</option>
+				<option>おもちゃ、ゲーム</option>
+				<option>本、雑誌</option>
+				<option>音楽、CD</option>
+				<option>映画、DVD</option>
+				<option>コミック、アニメグッズ</option>
+				<option>食品、飲料</option>
+				<option>ビューティー、ヘルスケア</option>
+				<option>ペット、生き物</option>
+				<option>不動産</option>
+			</select>
+		</label>
 		<br><input class="mainSubmit" type="submit" value="出品">
 	</form>
 	<!-- <form class="main" action="/listing" method="post" >
@@ -30,12 +48,13 @@
 	<h1>出品リスト</h1> -->
 	<table>
 		<tr><th>登録番号</th><th>商品名</th><th>写真
-		</th><th>期限</th></tr>
+		</th><th>期限</th><th>商品カテゴリ</th></tr>
 		<tr th:each="c : ${products}">
 		<td th:text="${c.id}"></td>
 		<td th:text="${c.name}"></td>
 		<td th:text="${c.phot}"></td>
-		<td th:text="${c.date}"></td>
+		<td th:text="|${dateNow}から${c.date}まで|"></td> 
+		<td th:text="${c.category}"></td>
 		</tr>
 	</table>
 	<div class="orverView">

@@ -1,22 +1,21 @@
 package com.example.demo;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
-import org.springframework.web.multipart.MultipartFile;
-
 @Entity
 @Table
-public class ProductData {
+public class DatailProduct {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column private long id;
 	
-	@Column (length = 20, nullable = false)
-	private String name;
+	@Column ( nullable = false)
+	private int price;
 	
-	@Column (length = 20,nullable = false)
-	private String phot;
+	@Column (nullable = false)
+	private int bit;
 	
 	@Column ( nullable = false)
 	private String date;
@@ -24,17 +23,18 @@ public class ProductData {
 	@Column(nullable = false)
 	private String category;
 	
-//	@ManyToOne
-//	private DatailProduct datailProduct;
+	
+//	@OneToMany(mappedBy = "ProductData")
+//	private List<ProductData> productDataList;
 	
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
 	
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	public int getName() {return price;}
+	public void setName(int price) {this.price = price;}
 	
-	public String getPhot() {return phot;}
-	public void setPhot(String phot) {this.phot = phot;}
+	public int getPhot() {return bit;}
+	public void setPhot(int bit) {this.bit = bit;}
 	
 	public String getDate() {return date;}
 	public void setDate(String date) {this.date = date;}

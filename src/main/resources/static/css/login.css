@@ -32,3 +32,22 @@
     text-align: center;
     background-color: rgb(236, 195, 91);
 }
+.footerList a{
+    border: 2px double rgb(245, 201, 7);
+    color: rgb(204, 98, 11);
+    font-family: monospace;
+    background-color: rgb(198, 218, 20);
+    margin-right: 70%;
+    margin-left: 15%;
+    /* padding:1.5vw 1.5vw 1.5vw 1.5vw; */
+    text-align: center;
+}
+.footerRegist a{
+    border: 2px double rgb(245, 201, 7);
+    color: rgb(184, 158, 15);
+    font-family: monospace;
+    background-color: rgb(198, 218, 20);
+    margin-left: 10%;
+    margin-right: 70%;
+    text-align: center;
+}

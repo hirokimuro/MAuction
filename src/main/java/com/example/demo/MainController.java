@@ -1,11 +1,22 @@
 package com.example.demo;
 
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,32 +25,77 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
+	
+//	@Autowired
+//	DatailProductRepository datailRepository;
 	@Autowired
 	UserDataRepository repository;
 	@Autowired
 	ProductDataRepository repositoryP;
 	
+//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+//    public ModelAndView productListGet(ModelAndView mv) {
+//        List<ProductData> productDataList = repositoryP.findAll();
+//        mv.addObject("productDataList", productDataList);
+//        mv.setViewName("productList");
+//        return mv;
+//    }
+// 
+//    @RequestMapping(value = "/list", method = RequestMethod.POST)
+//    public ModelAndView productListPost(@ModelAttribute("formModel") ProductData
+//    		productData, ModelAndView mv, HttpServletRequest httpServletRequest) {
+//        String category = httpServletRequest.getRemoteUser();
+//        DatailProduct datailProduct = datailRepository.findOne(category);
+//        ProductData productData = new ProductData();
+//        productData.setPhot(phot);
+//        productData.setName(name);
+//        repositoryP.save(productData);
+//        return productListGet(mv);
+//    }
+	@ModelAttribute
+	public ProductData setForm() {
+		return new ProductData();
+	}
+//	@RequestMapping("/first")
+//	public String first() {
+//		return "listing";
+//	}
+	
+	
+	
 	@RequestMapping(value="/listing",method=RequestMethod.GET)
-	public ModelAndView listingGet(ModelAndView mv) {
+	public ModelAndView listingGet(ModelAndView mv , String[] args ) 
+	{
 		List<ProductData> products = repositoryP.findAll();
 		mv.addObject("products",products);
 		mv.setViewName("listing");
+		
+		
+		Date dateNow = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'-'MM'-'dd");
+		mv.addObject("dateNow",sdf.format(dateNow));
+		
+		
 		return mv;
 	}
 	@RequestMapping(value="/listing", method = RequestMethod.POST)
 	public ModelAndView listingPost(@ModelAttribute("formModel") ProductData
-	productData, ModelAndView mv){
+	productData, ModelAndView mv,String[] args,Model model)throws Exception{
 	repositoryP.saveAndFlush(productData);
+	
+	System.out.println(productData.getPhot());
+    StringBuffer data = new StringBuffer();
+    String base64 = new String(Base64.encodeBase64(productData.getPhot().getBytes()),"ASCII");
+    data.append("data:image/jpeg;base64,");
+    data.append(base64);
+    
+    System.out.println(base64);
+    		
+    model.addAttribute("base64image",data.toString());
+    
 	return new ModelAndView("redirect:/listing");
+	
 	}
-//	@RequestMapping(value="/listing", method = RequestMethod.POST)
-//	public ModelAndView listingPost(@RequestParam("date") String date , ModelAndView mv){
-//		System.out.println(date);
-//		List<ProductData> products = repositoryP.findAll();
-//		mv.addObject("products",products);
-//		mv.setViewName("listing");
-//		return mv;
-//	}
 	
 	
 	@RequestMapping(value="/regist",method=RequestMethod.GET)
