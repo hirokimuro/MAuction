@@ -12,15 +12,18 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.source.ConfigurationPropertyName.Form;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,14 +55,13 @@ public class MainController {
 //        repositoryP.save(productData);
 //        return productListGet(mv);
 //    }
-	@ModelAttribute
-	public ProductData setForm() {
-		return new ProductData();
-	}
-//	@RequestMapping("/first")
-//	public String first() {
-//		return "listing";
+	
+	
+//	@ModelAttribute
+//	public ProductData setForm() {
+//		return new ProductData();
 //	}
+
 	
 	
 	
@@ -78,25 +80,34 @@ public class MainController {
 		
 		return mv;
 	}
-	@RequestMapping(value="/listing", method = RequestMethod.POST)
-	public ModelAndView listingPost(@ModelAttribute("formModel") ProductData
-	productData, ModelAndView mv,String[] args,Model model)throws Exception{
-	repositoryP.saveAndFlush(productData);
 	
-	System.out.println(productData.getPhot());
-    StringBuffer data = new StringBuffer();
-    String base64 = new String(Base64.encodeBase64(productData.getPhot().getBytes()),"ASCII");
-    data.append("data:image/jpeg;base64,");
-    data.append(base64);
+	
+	@RequestMapping(value="/listing", method = RequestMethod.POST)
+	public ModelAndView listingPost(@ModelAttribute("formModel") ProductData productData, ModelAndView mv,
+			String[] args,Model model,@RequestParam("phot") String phot)throws Exception{
+	
+	byte[] photByte = Base64.decodeBase64(phot);
+//	return null;
+//    StringBuffer data = new StringBuffer();
+//    String base64 = new String(Base64.encodeBase64(productData.getPhot().getBytes()),"ASCII");
+//    data.append("data:image/jpeg;base64,");
+//    data.append(base64);
     
-    System.out.println(base64);
-    		
-    model.addAttribute("base64image",data.toString());
+    //StringBuffer phot = new StringBuffer();
+//    productData.getPhot();	
+//    String base64 = new String(Base64.encodeBase64(phot.getBytes()),"ASCII");
+    System.out.println(photByte);
     
+    
+//    data.append("data:phot:image/jpeg;base64,");
+//    data.append(base64);
+  
+//    model.addAttribute("base64phot",data.toString());
+    
+    repositoryP.saveAndFlush(productData);
 	return new ModelAndView("redirect:/listing");
 	
 	}
-	
 	
 	@RequestMapping(value="/regist",method=RequestMethod.GET)
 	public ModelAndView memberRegistGet(ModelAndView mv) {
