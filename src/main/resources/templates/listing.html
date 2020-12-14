@@ -17,7 +17,7 @@
 	<form class="main" action="/listing" method="post" th:object="${formModel}" enctype="multipart/form-data">
 		<p>出品</p>
 		<label>商品名<input type="text" name="name"></label><br>
-		<label>写真<input type="file" name="phot" accept="image/*"  multiple ></label>
+		<label>写真<input type="file" name="image" accept="image/*"  multiple ></label>
 		<br><label>期限<input type="date" name="date"></label>
 		<br><label>商品カテゴリ
 			<select name="category">
@@ -52,7 +52,7 @@
 		<tr th:each="c : ${products}">
 		<td th:text="${c.id}"></td>
 		<td th:text="${c.name}"></td>
-		<td th:src="${base64phot}"></td>
+		<td ><image th:src="${phot}"></td>
 		<td th:text="|${dateNow}から${c.date}まで|"></td> 
 		<td th:text="${c.category}"></td>
 		</tr>

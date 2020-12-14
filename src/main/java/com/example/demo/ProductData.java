@@ -15,7 +15,7 @@ public class ProductData {
 	@Column (length = 20, nullable = false)
 	private String name;
 	
-	@Column (length = 20,nullable = false)
+	@Column (length = 1000000,nullable = true)
 	private String phot;
 	
 	@Column ( nullable = false)

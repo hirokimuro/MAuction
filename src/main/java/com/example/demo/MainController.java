@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyName.Form;
 import org.springframework.stereotype.Controller;
@@ -61,51 +62,90 @@ public class MainController {
 //	public ProductData setForm() {
 //		return new ProductData();
 //	}
-
+	@RequestMapping(value="/test",method=RequestMethod.GET)
+	public ModelAndView testGet(ModelAndView mv , String[] args ) 
+	{
+		ProductData products = repositoryP.findById((long)1).get();
+		products.getPhot();
+		mv.addObject("phot",products.getPhot());
+		
+		StringBuffer data = new StringBuffer();
+		data.append("data:image/jpeg;base64,");
+		data.append(products.getPhot());
+		mv.addObject("image",data.toString());
+		mv.setViewName("test");
+		return mv;
 	
+	}
+	@RequestMapping(value="/a", method=RequestMethod.GET)
+	public ModelAndView headerGet(ModelAndView mv , String[] args ) 
+	{
+		List<ProductData> products = repositoryP.findAll();
+		ProductData products1 = repositoryP.findById((long)1).get();
+		products1.getPhot();
+		StringBuffer data = new StringBuffer();
+		data.append("data:image/jpeg;base64,");
+		data.append(products1.getPhot());
+		
+		mv.addObject("products",products);
+		mv.addObject("phot",data.toString());
+		mv.setViewName("header");
+		
+//		Date dateNow = new Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'-'MM'-'dd");
+//		mv.addObject("dateNow",sdf.format(dateNow));
+		return mv;
+	
+	}
 	
 	
 	@RequestMapping(value="/listing",method=RequestMethod.GET)
 	public ModelAndView listingGet(ModelAndView mv , String[] args ) 
 	{
+//		ProductData products = repositoryP.findAll();
 		List<ProductData> products = repositoryP.findAll();
+//		ProductData products1 = repositoryP.findById((long)1).get();(情報が無いためこのページで使えない)
+//		products.phot();
+//		mv.addObject("phot",products1.getPhot());
+//		if(((ProductData) products).getPhot() != null) {
+//		String image =((ProductData) products).getPhot();
+//		StringBuffer data = new StringBuffer();
+//		data.append("data:image/jpeg;base64,");
+//		data.append(image);
+//		mv.addObject("phot",data.toString());
+//		}
 		mv.addObject("products",products);
 		mv.setViewName("listing");
+	
 		
 		
 		Date dateNow = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'-'MM'-'dd");
 		mv.addObject("dateNow",sdf.format(dateNow));
 		
-		
 		return mv;
 	}
 	
 	
 	@RequestMapping(value="/listing", method = RequestMethod.POST)
-	public ModelAndView listingPost(@ModelAttribute("formModel") ProductData productData, ModelAndView mv,
-			String[] args,Model model,@RequestParam("phot") String phot)throws Exception{
+	public ModelAndView listingPost(@RequestParam("image") MultipartFile image,@ModelAttribute("formModel") ProductData productData, ModelAndView mv,
+			String[] args,Model model)throws Exception{
 	
-	byte[] photByte = Base64.decodeBase64(phot);
-//	return null;
-//    StringBuffer data = new StringBuffer();
-//    String base64 = new String(Base64.encodeBase64(productData.getPhot().getBytes()),"ASCII");
+    StringBuffer data = new StringBuffer();
+        
+    String base64 = new String(Base64.encodeBase64(image.getBytes()),"ASCII");
+   
+    System.out.println(base64);
+    productData.setPhot(base64);
+    
 //    data.append("data:image/jpeg;base64,");
-//    data.append(base64);
-    
-    //StringBuffer phot = new StringBuffer();
-//    productData.getPhot();	
-//    String base64 = new String(Base64.encodeBase64(phot.getBytes()),"ASCII");
-    System.out.println(photByte);
-    
-    
-//    data.append("data:phot:image/jpeg;base64,");
 //    data.append(base64);
   
 //    model.addAttribute("base64phot",data.toString());
     
     repositoryP.saveAndFlush(productData);
 	return new ModelAndView("redirect:/listing");
+	
 	
 	}
 	
