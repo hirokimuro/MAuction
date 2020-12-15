@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyName.Form;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,13 +102,13 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/listing",method=RequestMethod.GET)
-	public ModelAndView listingGet(ModelAndView mv , String[] args ) 
+	public ModelAndView listingGet(ModelAndView mv , String[] args) 
 	{
 //		ProductData products = repositoryP.findAll();
 		List<ProductData> products = repositoryP.findAll();
-//		ProductData products1 = repositoryP.findById((long)1).get();(情報が無いためこのページで使えない)
-//		products.phot();
-//		mv.addObject("phot",products1.getPhot());
+//		ProductData products1 = repositoryP.findById((long)1).get();(情報が無いためこのページで使えない、出品した商品を見るようのhtml必要？)
+
+		
 //		if(((ProductData) products).getPhot() != null) {
 //		String image =((ProductData) products).getPhot();
 //		StringBuffer data = new StringBuffer();
@@ -129,10 +131,14 @@ public class MainController {
 	
 	@RequestMapping(value="/listing", method = RequestMethod.POST)
 	public ModelAndView listingPost(@RequestParam("image") MultipartFile image,@ModelAttribute("formModel") ProductData productData, ModelAndView mv,
-			String[] args,Model model)throws Exception{
-	
-    StringBuffer data = new StringBuffer();
-        
+			String[] args,Model model,@Validated ProductData productdata
+			,BindingResult br)throws Exception{
+	if(br.hasErrors()) {
+//		return new ModelAndView("redirect:/listing");
+		return new ModelAndView("/listing");
+	}
+		
+    StringBuffer data = new StringBuffer();  
     String base64 = new String(Base64.encodeBase64(image.getBytes()),"ASCII");
    
     System.out.println(base64);

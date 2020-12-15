@@ -3,17 +3,20 @@ package com.example.demo;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.web.multipart.MultipartFile;
 
-@Entity
+@Entity(name = "product")
 @Table
 public class ProductData {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column private long id;
 	
-	@Column (length = 20, nullable = false)
+	@NotBlank(message = "必須項目です")
+	@Column (length = 20, nullable = false) 
 	private String name;
+	
 	
 	@Column (length = 1000000,nullable = true)
 	private String phot;
@@ -24,8 +27,9 @@ public class ProductData {
 	@Column(nullable = false)
 	private String category;
 	
-//	@ManyToOne
-//	private DatailProduct datailProduct;
+//	@ManyToOne(optional = true)
+//	@JoinColumn
+//	private Datail datail;
 	
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
