@@ -22,7 +22,7 @@
     <div class="main">
         <p>会員登録ページ</p>
         <form method="post" action="/regist"th:object="${formModel}">
-            <label for="name">　　　名前　　<input type="text" name="name"></label><br>
+            <label for="username">　　　名前　　<input type="text" name="username"></label><br>
             <br><label for="mail">メールアドレス<input type="text" name="mail"></label><br>
             <br><label for="pass">　パスワード　<input type="text" name="pass"><br><p>＊20文字以下</p></label>
             <br><input class="mainSubmit"type="submit" value="登録">
@@ -34,7 +34,7 @@
 		</th><th>パスワード</th></tr>
 		<tr th:each="c : ${customers}">
 		<td th:text="${c.id}"></td>
-		<td th:text="${c.name}"></td>
+		<td th:text="${c.username}"></td>
 		<td th:text="${c.mail}"></td>
 		<td>見せられないよ</td>
 		</tr>

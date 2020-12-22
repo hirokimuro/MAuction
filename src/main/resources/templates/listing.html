@@ -16,7 +16,7 @@
     </div>
 	<form class="main" action="/listing" method="post" th:object="${formModel}" enctype="multipart/form-data">
 		<p>出品</p>
-		<label>商品名<input type="text" name="name"></label><br>
+		<label>商品名<span th:text="${error}"></span><input type="text" name="name"></label><br>
 		<label>写真<input type="file" name="image" accept="image/*"  multiple ></label>
 		<br><label>期限<input type="date" name="date"></label>
 		<br><label>商品カテゴリ

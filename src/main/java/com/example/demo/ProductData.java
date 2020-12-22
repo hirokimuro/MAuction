@@ -10,7 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity(name = "product")
 @Table
 public class ProductData {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column private long id;
 	
 	@NotBlank(message = "必須項目です")
@@ -21,15 +22,19 @@ public class ProductData {
 	@Column (length = 1000000,nullable = true)
 	private String phot;
 	
+	
 	@Column ( nullable = false)
 	private String date;
 	
 	@Column(nullable = false)
 	private String category;
 	
-//	@ManyToOne(optional = true)
-//	@JoinColumn
-//	private Datail datail;
+	
+	@ManyToOne
+	private UserData userData;
+	
+//	@ManyToOne
+//	private ProductData productData;
 	
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
@@ -45,4 +50,21 @@ public class ProductData {
 	
 	public String getCategory() {return category;}
 	public void setCategory(String category) {this.category = category;}
+	
+	public UserData getUserData() {
+		return userData;
+	}
+	public void setUserData(UserData userData) {
+		this.userData = userData;
+	}
+	
+	
+	
+//	public ProductData getProductData() {
+//		return productData;
+//	}
+//	public void setProductData(ProductData productData) {
+//		this.productData = productData;
+//	}
+	
 }

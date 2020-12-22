@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Datail")
 @Table
 public class DatailProduct {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,25 +20,35 @@ public class DatailProduct {
 	@Column ( nullable = false)
 	private String date;
 	
-	@Column(nullable = false)
-	private String category;
+//	@Column(nullable = false)
+//	private String category;
 	
 	
-//	@OneToMany(mappedBy = "ProductData")
+//	@OneToMany(mappedBy = "productData")
 //	private List<ProductData> productDataList;
+	
 	
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
 	
-	public int getName() {return price;}
-	public void setName(int price) {this.price = price;}
+	public int getPrice() {return price;}
+	public void setPrice(int price) {this.price = price;}
 	
-	public int getPhot() {return bit;}
-	public void setPhot(int bit) {this.bit = bit;}
+	public int getBit() {return bit;}
+	public void setBit(int bit) {this.bit = bit;}
 	
 	public String getDate() {return date;}
 	public void setDate(String date) {this.date = date;}
 	
-	public String getCategory() {return category;}
-	public void setCategory(String category) {this.category = category;}
+//	public String getCategory() {return category;}
+//	public void setCategory(String category) {this.category = category;}
+	
+//	public List<ProductData> getProductDataList() {
+//		return productDataList;
+//	}
+//	public void setProductDataList(List<ProductData> productDataList) {
+//		this.productDataList = productDataList;
+//	}
+	
+	
 }
