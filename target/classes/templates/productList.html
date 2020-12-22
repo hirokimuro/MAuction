@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form class="main" action="/list" method="post" th:object="${formModel}" enctype="multipart/form-data">
+		<p>出品</p>
+		<label>価格<input type="text" name="price"></label><br>
+		<label>入札<input type="text" name="bit"  ></label>
+		<br><label>期限<input type="date" name="date"></label>
+		<br><label>商品情報</label>
+		<br><input class="mainSubmit" type="submit" value="出品">
+	</form>
+
+
+
+	<table>
+		<tr><th>登録番号</th><th>価格</th><th>入札
+		</th><th>期限</th><th>商品情報</th></tr>
+		<tr th:each="c : ${lists}">
+		<td th:text="${c.id}"></td>
+		<td th:text="${c.price}"></td>
+		<td th:text="${c.bit}"></td>
+		<td th:text="${c.date}"></td> 
+		<td th:text="${c.productDataList}"></td>
+		</tr>
+	</table>
+	
+</body>
+</html>

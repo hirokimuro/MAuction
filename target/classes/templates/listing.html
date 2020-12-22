@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>listing</title>
+<link rel="stylesheet" th:href="@{/css/listing.css}">
+</head>
+<body>
+    <div class="header">
+        <p class="title"><a href="/auction">Mオークション</a></p>
+        <div class="seach">    
+            <form>
+                <P><label>全ての商品から探す<input type="text"><input class="seachIn" type="submit" value="検索"></label></P>
+            </form>
+        </div>
+    </div>
+	<form class="main" action="/listing" method="post" th:object="${formModel}" enctype="multipart/form-data">
+		<p>出品</p>
+		<label>商品名<span th:text="${error}"></span><input type="text" name="name"></label><br>
+		<label>写真<input type="file" name="image" accept="image/*"  multiple ></label>
+		<br><label>期限<input type="date" name="date"></label>
+		<br><label>商品カテゴリ
+			<select name="category">
+				<option >商品カテゴリを選んで下さい</option>
+				<option>自動車</option>
+				<option>ファッション</option>
+				<option>スポーツ、レジャー</option>
+				<option>家電、AV</option>
+				<option>コンピュータ</option>
+				<option>おもちゃ、ゲーム</option>
+				<option>本、雑誌</option>
+				<option>音楽、CD</option>
+				<option>映画、DVD</option>
+				<option>コミック、アニメグッズ</option>
+				<option>食品、飲料</option>
+				<option>ビューティー、ヘルスケア</option>
+				<option>ペット、生き物</option>
+				<option>不動産</option>
+			</select>
+		</label>
+		<br><input class="mainSubmit" type="submit" value="出品">
+	</form>
+	<!-- <form class="main" action="/listing" method="post" >
+		<br><label>期限<input type="date" name="date"></label>
+		<br><input class="mainSubmit" type="submit" value="出品">
+		<br><input type="datetime-local" id="cal" name="">
+	</form>
+	<h1>出品リスト</h1> -->
+	<table>
+		<tr><th>登録番号</th><th>商品名</th><th>写真
+		</th><th>期限</th><th>商品カテゴリ</th></tr>
+		<tr th:each="c : ${products}">
+		<td th:text="${c.id}"></td>
+		<td th:text="${c.name}"></td>
+		<td ><image th:src="${phot}"></td>
+		<td th:text="|${dateNow}から${c.date}まで|"></td> 
+		<td th:text="${c.category}"></td>
+		</tr>
+	</table>
+	<div class="orverView">
+        <p>カテゴリ一覧　ブランド｜女性ファッション｜男性ファッション｜女性アクセサリー/時計｜男性アクセサリー/時計香水/コスメ/ネイル｜
+            キッズ/ベビー｜自動車｜バイク｜CD/DVD/ビデオゲーム本体/ソフト｜トレーディングカード｜アニメ/コミック/キャラクター｜おもちゃ｜
+            家電/AV携帯電話/スマートフォン｜PC本体/周辺機器｜インテリア/ライフヘルス/ビューティーグルメ/ドリンク｜ホビー｜
+            ペット/手芸/園芸レジャー/スポーツ本/雑誌｜タレントグッズ｜チケット/金券
+            オークション <br>
+            
+            プライバシーポリシー　会員規約　会社概要　特定商取引法等に基づく表示　チャリティ実績　よくある質問　古物営業法に基づく表記
+            　<br> © Mauction Corporation. All Rights Reserved.</p>
+    </div>
+</body>

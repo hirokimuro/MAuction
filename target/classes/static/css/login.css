@@ -1,0 +1,53 @@
+@charset "UTF-8";
+.title{
+    color: rgb(231, 137, 13);
+    text-align: center;
+    font-size: 3vw;
+    font-weight: 600;
+    font-family:fantasy;
+    height: 4vw;
+    margin-left: 2vw;
+    margin-right: 10vw;
+    margin-top: 1%;
+}
+.header a{
+    color: rgb(231, 137, 13);
+    text-decoration: none;
+}
+.header{
+    display: flex;
+    text-align: center;
+}
+.seach{
+    color: blue;
+    text-align: center;
+    margin-left: 1vw;
+    margin-top: 1vw;
+}
+.seachIn{
+    margin-left: 2vw;
+    background-color: yellow;
+}
+.info{
+    text-align: center;
+    background-color: rgb(236, 195, 91);
+}
+.footerList a{
+    border: 2px double rgb(245, 201, 7);
+    color: rgb(204, 98, 11);
+    font-family: monospace;
+    background-color: rgb(198, 218, 20);
+    margin-right: 70%;
+    margin-left: 15%;
+    /* padding:1.5vw 1.5vw 1.5vw 1.5vw; */
+    text-align: center;
+}
+.footerRegist a{
+    border: 2px double rgb(245, 201, 7);
+    color: rgb(184, 158, 15);
+    font-family: monospace;
+    background-color: rgb(198, 218, 20);
+    margin-left: 10%;
+    margin-right: 70%;
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>出品済みリスト</h1>
+	<table>
+		<tr><th>登録番号</th><th>商品名</th><th>写真
+		</th><th>期限</th><th>商品カテゴリ</th></tr>
+		<tr th:each="c : ${products}">
+		<td th:text="${c.id}"></td>
+		<td th:text="${c.name}"></td>
+		<td ><!-- <img th:src="${phot}" --><img th:src="|data:image/jpeg;base64,${c.phot}|"></td>
+		<td th:text="|${dateNow}から${c.date}まで|"></td> 
+		<td th:text="${c.category}"></td>
+		</tr>
+	</table>
+	<p class="footerList"><a href="/listing">続けて出品する</a></p>
+</body>
+</html>

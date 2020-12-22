@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+img{
+	width:15vw;
+	height: auto;
+	margin-left:10vw;
+	background-color:red;
+}
