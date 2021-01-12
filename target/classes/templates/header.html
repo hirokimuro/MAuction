@@ -8,10 +8,11 @@
 <body>
 	<h1>出品済みリスト</h1>
 	<table>
-		<tr><th>登録番号</th><th>商品名</th><th>写真
+		<tr><th>出品者</th><th>商品名</th><th>写真
 		</th><th>期限</th><th>商品カテゴリ</th></tr>
 		<tr th:each="c : ${products}">
-		<td th:text="${c.id}"></td>
+ 		<td th:text="${c.userData.username}">名前</td>
+		<!-- <td th:text="${c.id}"></td> -->
 		<td th:text="${c.name}"></td>
 		<td ><!-- <img th:src="${phot}" --><img th:src="|data:image/jpeg;base64,${c.phot}|"></td>
 		<td th:text="|${dateNow}から${c.date}まで|"></td> 

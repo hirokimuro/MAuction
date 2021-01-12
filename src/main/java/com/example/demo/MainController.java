@@ -19,6 +19,7 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyName.Form;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,6 +41,8 @@ public class MainController {
 	UserDataRepository repository;
 	@Autowired
 	ProductDataRepository repositoryP;
+//	@Autowired
+//	JdbcTemplate jdbcTemplate;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView productListGet(ModelAndView mv) {
@@ -66,20 +69,8 @@ public class MainController {
 	public ModelAndView headerGet(ModelAndView mv , String[] args ) 
 	{
 		List<ProductData> products = repositoryP.findAll();
-		
-//		ProductData products1 = repositoryP.findById((long)1).get();
-//		ProductData products2 = repositoryP.findByPhotIsNotNull();
-		
-//		products1.getPhot();
-//		products2.getPhot();
-//		StringBuffer data = new StringBuffer();
-//		data.append("data:image/jpeg;base64,");
-//		data.append(products2.getPhot());
-		
-//		StringBuffer data = new StringBuffer();
-//		data.append("data:image/jpeg;base64,");
-//		data.append(products1.getPhot());
-//		String s = data.toString();
+		System.out.println(products.get(0).getUserData().getUsername());
+		System.out.println(products.get(0).getId());
 		mv.addObject("products",products);
 //		mv.addObject("phot",data.toString());
 		mv.setViewName("header");
@@ -100,7 +91,7 @@ public class MainController {
 
 		mv.addObject("products",products);
 		mv.setViewName("listing");
-
+		
 		Date dateNow = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'-'MM'-'dd");
 		mv.addObject("dateNow",sdf.format(dateNow));
@@ -115,11 +106,12 @@ public class MainController {
 	,@RequestParam("name") String name,HttpServletRequest httpServletRequest)throws Exception{
 	
 //	String username = httpServletRequest.getRemoteUser();	
-//	UserData userData = repository.findByUsername(username);
+//	System.out.println(username);
+	String username = "室";
+	UserData userData = repository.findByUsername(username);
 //	ProductData products= new ProductData();
-//	productData.setUserData(userData);
-//	productData.setName(username);
-//	repositoryP.save(products);
+	productData.setUserData(userData);
+//	products.setName(username);
 	
 		if(br.hasErrors()) {
 			mv.addObject("error","必須項目です");
@@ -128,13 +120,9 @@ public class MainController {
 		
     StringBuffer data = new StringBuffer();  
     String base64 = new String(Base64.encodeBase64(image.getBytes()),"ASCII");
-  
     productData.setPhot(base64);
-    
     repositoryP.saveAndFlush(productData);
 	return new ModelAndView("redirect:/listing");
-	
-	
 	}
 	
 	@RequestMapping(value="/regist",method=RequestMethod.GET)

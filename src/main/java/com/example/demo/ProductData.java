@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Table
 public class ProductData {
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column private long id;
 	
 	@NotBlank(message = "必須項目です")
