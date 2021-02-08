@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.crypto.Data;
 
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -25,6 +27,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,11 +48,34 @@ public class MainController {
 //	@Autowired
 //	JdbcTemplate jdbcTemplate;
 	
+	
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView productListGet(ModelAndView mv) {
+    public ModelAndView productListGet(ModelAndView mv,HttpServletResponse httpServletResponse
+    		,@CookieValue("key1")String cookieValue,HttpServletRequest request){
         List<DatailProduct> datailProductList = datailRepository.findAll();
         mv.addObject("Lists", datailProductList);
         mv.setViewName("productList");
+        
+//        httpServletResponse.addCookie(new Cookie("key1","value1"));
+        System.out.println(cookieValue);
+        
+        
+        
+        Cookie cookie = new Cookie("key1","value1");
+        
+        cookie.setMaxAge(0);
+        httpServletResponse.addCookie(cookie);
+//        
+//        Cookie cookies = request.getCookies();
+//        for (Cookie cookie : cookies) {
+//            if ("id".equals(cookie.getName())) {
+//                cookie.setMaxAge(0);
+//                cookie.setPath("/");
+//                response.addCookie(cookie);
+//            }
+//        }
+
         return mv;
     }
  
@@ -143,11 +170,11 @@ public class MainController {
 		mv.setViewName("homePage");
 		return mv;
 	}
-	@RequestMapping(value="/login")
-	public ModelAndView login(ModelAndView mv) {
-		mv.setViewName("login");
-		return mv;
-	}
+//	@RequestMapping(value="/login")
+//	public ModelAndView login(ModelAndView mv) {
+//		mv.setViewName("login");
+//		return mv;
+//	}
 	@RequestMapping(value="/regist")
 	public ModelAndView memberRegist(ModelAndView mv) {
 		mv.setViewName("memberRegist");

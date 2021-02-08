@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +16,22 @@
             </form>
         </div>
     </div>
-    <form action="" class="info">
+    <div th:if="${param.error}">
+            Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+          You have been logged out.
+    </div>
+    <form th:action="@{/sign_in}" method="post"  class="info" >
         <h1>会員登録がお済みの方</h1>
-        <h2>Mオークションに登録したメールアドレスと、パスワードでログインしてください。</h2>
-        <p><label for="">メールアドレス</label><br><input type="text"></p>
-        <p><label for="">パスワード</label><br><input type="text"></p>
-        <input type="submit" value="ログイン">
+        <h2>Mオークションに登録したユーザーと、パスワードでログインしてください。</h2>
+        <input type="text" name="username">user_name
+        <br/>
+        <input type="password" name="password">password
+        <br/>
+       <!--  <p><label for="">メールアドレス</label><br><input type="text"></p>
+        <p><label for="">パスワード</label><br><input type="text"></p> -->
+        <input type="submit" value="Login">
     </form>
     <p class="footerRegist"><a href="/regist">会員登録未登録の方はこちら</a></p>
     <p class="footerList"><a href="/listing">出品</a></p>
