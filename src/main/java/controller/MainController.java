@@ -1,4 +1,4 @@
-package com.example.demo;
+package controller;
 
 
 import java.awt.image.BufferedImage;
@@ -35,6 +35,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import entity.DatailProduct;
+import entity.ProductData;
+import entity.UserData;
+import repository.DatailProductRepository;
+import repository.ProductDataRepository;
+import repository.UserDataRepository;
 
 @Controller
 public class MainController {
